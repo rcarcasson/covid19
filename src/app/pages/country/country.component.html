@@ -1,0 +1,70 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h3 class="text-dark text-center"><span [ngClass]="flag"></span> {{ country.Country }}</h3>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h4>{{country.NewConfirmed | number}}</h4>
+                                <p>Nuevos Confirmados</p>
+                                <h4>{{country.TotalConfirmed | number}}</h4>
+                                <p>Total Confirmados</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-head-side-mask"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-danger">
+                            <div class="inner">
+                                <h4>{{country.NewDeaths | number}}</h4>
+                                <p>Nuevos Fallecidos</p>
+                                <h4>{{country.TotalDeaths | number}}</h4>
+                                <p>Total Fallecidos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-cross"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-success">
+                            <div class="inner">
+                                <h4>{{country.NewRecovered | number}}</h4>
+                                <p>Nuevos Recuperados</p>
+                                <h4>{{country.TotalRecovered | number}}</h4>
+                                <p>Total Recuperados</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-warning">
+                            <div class="inner">
+                                <h4>Atención</h4>
+                                <p>Los datos desplegados pueden presentar una diferencia de 24 horas con los datos de cada país que entrega en sus informes diarios.</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container">
+                <app-maingraph></app-maingraph>
+            </div>
+        </section>
+    </div>
+</div>

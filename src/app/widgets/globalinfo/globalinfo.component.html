@@ -1,0 +1,99 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3 class="m-0 text-dark">Situación Global <small>(últ. 24 hrs.)</small></h3>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h4>{{cargando ? '0' : summary.Global.NewConfirmed | number}}</h4>
+                                <p>Nuevos Confirmados</p>
+                                <h4>{{cargando ? '0' : summary.Global.TotalConfirmed | number}}</h4>
+                                <p>Total Confirmados</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-head-side-mask"></i>
+                            </div>
+                            <div class="overlay" *ngIf="cargando">
+                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-danger">
+                            <div class="inner">
+                                <h4>{{cargando ? '0' : summary.Global.NewDeaths | number}}</h4>
+                                <p>Nuevos Fallecidos</p>
+                                <h4>{{cargando ? '0' : summary.Global.TotalDeaths | number}}</h4>
+                                <p>Total Fallecidos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-cross"></i>
+                            </div>
+                            <div class="overlay" *ngIf="cargando">
+                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-success">
+                            <div class="inner">
+                                <h4>{{cargando ? '0' : summary.Global.NewRecovered | number}}</h4>
+                                <p>Nuevos Recuperados</p>
+                                <h4>{{cargando ? '0' : summary.Global.TotalRecovered | number}}</h4>
+                                <p>Total Recuperados</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="overlay" *ngIf="cargando">
+                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-gradient-warning">
+                            <div class="inner">
+                                <h4>Atención</h4>
+                                <p>Los datos desplegados pueden presentar una diferencia de 24 horas con los datos de cada país que entrega en sus informes diarios.</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-info"></i>
+                            </div>
+                            <div class="overlay" *ngIf="cargando">
+                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Información por Países</h3>
+                            </div>
+                            <div class="card-body">
+                                <table datatable [dtOptions]="dtOptions" class="table table-bordered hover" *ngIf="!cargando" style="width: 100%;">
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <blockquote class="quote-danger" *ngIf="error">
+            <h5>Error</h5>
+            <p>Se produjo un error al obtener la información desde el servicio. <button type="button" class="btn btn-primary btn-sm" (click)="getSummary()">Reintentar</button></p>
+        </blockquote>
+    </div>
+</div>
