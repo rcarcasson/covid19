@@ -21,7 +21,7 @@ export class CovidProvider {
       return throwError(error);
     };
 
-    return this.covidService.getByCountryAllStatus('chile')
+    return this.covidService.getByCountryAllStatus(country)
       .pipe(map(cbOk))
       .pipe(catchError(cbError));
 

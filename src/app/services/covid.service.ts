@@ -28,6 +28,7 @@ export class CovidService {
 
   public getByCountryAllStatus(country: string): Observable<any> {
     this.endpoint = _.get(environment, 'ENDPOINTS.COUNTRY_ALL_STATUS', '');
+    this.endpoint = _.replace(this.endpoint, '{cod}', country.toLowerCase());
 
     return this.http.get(this.endpoint)
       .pipe(catchError(this.cbFailure));

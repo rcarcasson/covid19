@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { CovidProvider } from 'src/app/services/covid.provider';
+import _ from 'lodash';
+import { CountryStats } from 'src/app/models/countrystats.model';
 
 
 @Component({
@@ -10,45 +11,57 @@ import { CovidProvider } from 'src/app/services/covid.provider';
   styleUrls: ['./maingraph.component.css']
 })
 export class MaingraphComponent implements OnInit {
+  @Input() data: CountryStats;
+  indice = 0;
 
-    lineChartData: ChartDataSets[] = [
-        { data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
-        ];
+    lineChartData: ChartDataSets[];
 
-    lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June'];
+    // tslint:disable-next-line: max-line-length
+    lineChartLabels: Label[];
 
     lineChartOptions = {
-    responsive: true,
+      responsive: true,
     };
 
     lineChartColors: Color[] = [
-    {
-        borderColor: 'black',
-        backgroundColor: 'rgba(255,255,0,0.28)',
-    },
+    { backgroundColor: 'rgba(66, 135, 255, 0.91)', borderColor: 'rgba(66, 135, 255, 0.91)' },
+    { backgroundColor: 'rgba(255, 242, 66, 0.91)', borderColor: 'rgba(255, 242, 66, 0.91)' },
+    { backgroundColor: 'rgba(200, 9, 9, 0.91)', borderColor: 'rgba(200, 9, 9, 0.91)' },
+    { backgroundColor: 'rgba(86, 200, 9, 0.91)', borderColor: 'rgba(86, 200, 9, 0.91)' }
     ];
 
     lineChartLegend = true;
     lineChartPlugins = [];
     lineChartType = 'line';
 
-  constructor(private covidProvider: CovidProvider) { }
+  constructor() { }
 
   ngOnInit() {
-      this.test();
+    this.data = _.reverse(this.data);
+    this.generarGrafico();
   }
 
-  private test() {
-    const cbOk = response => {
-        console.log(response);
-    };
+  private generarGrafico() {
+    let dataFiltrada: CountryStats;
+    dataFiltrada = _.slice(this.data, this.indice, 7);
+    dataFiltrada = _.reverse(dataFiltrada);
+    this.lineChartData = [
+      // tslint:disable-next-line: max-line-length
+      { data: _.map(dataFiltrada, 'Active'), label: 'Activos', backgroundColor: 'rgba(66, 135, 255, 0.91)', borderColor: 'black', fill: false },
+      // tslint:disable-next-line: max-line-length
+      { data: _.map(dataFiltrada, 'Confirmed'), label: 'Confirmados', backgroundColor: 'rgba(255, 242, 66, 0.91)', borderColor: 'black', fill: false },
+      // tslint:disable-next-line: max-line-length
+      { data: _.map(dataFiltrada, 'Deaths'), label: 'Muertos', backgroundColor: 'rgba(200, 9, 9, 0.91)', borderColor: 'black', fill: false },
+      // tslint:disable-next-line: max-line-length
+      { data: _.map(dataFiltrada, 'Recovered'), label: 'Recuperados', backgroundColor: 'rgba(86, 200, 9, 0.91)', borderColor: 'black', fill: false }
+    ];
 
-    const cbError = error => {
-        console.log(error);
-    };
+    this.lineChartLabels = _.map(dataFiltrada, this.extraeFecha);
+  }
 
-    // this.covidProvider.getByCountryAllStatus('chile').subscribe(cbOk, cbError);
-
+  private extraeFecha(fecha: CountryStats) {
+    const finalFecha: any = fecha.Date.toString().split('T');
+    return finalFecha[0];
   }
 
 }
