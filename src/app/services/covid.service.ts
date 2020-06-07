@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { ENDPOINTS } from '../constants/endpoints.const';
 import _ from 'lodash';
 import { catchError } from 'rxjs/operators';
 
@@ -27,7 +27,7 @@ export class CovidService {
   }
 
   public getByCountryAllStatus(country: string): Observable<any> {
-    this.endpoint = _.get(environment, 'ENDPOINTS.COUNTRY_ALL_STATUS', '');
+    this.endpoint = _.get(ENDPOINTS, 'COUNTRY_TOTAL_STATUS', '');
     this.endpoint = _.replace(this.endpoint, '{cod}', country.toLowerCase());
 
     return this.http.get(this.endpoint)
@@ -35,7 +35,15 @@ export class CovidService {
   }
 
   public getSummary(): Observable<any> {
-    this.endpoint = _.get(environment, 'ENDPOINTS.SUMMARY', '');
+    this.endpoint = _.get(ENDPOINTS, 'SUMMARY', '');
+
+    return this.http.get(this.endpoint)
+      .pipe(catchError(this.cbFailure));
+  }
+
+  public getInfoCountry(country: string): Observable<any> {
+    this.endpoint = _.get(ENDPOINTS, 'COUNTRY_INFO', '');
+    this.endpoint = _.replace(this.endpoint, '{cod}', country.toLowerCase());
 
     return this.http.get(this.endpoint)
       .pipe(catchError(this.cbFailure));

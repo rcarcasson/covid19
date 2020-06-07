@@ -15,6 +15,9 @@ export class CountryComponent implements OnInit {
   dataCountry: CountryStats[];
   flag = '';
   cargando = true;
+  infoCountry: any;
+  semana = 0;
+  dateUpdate: any;
 
 
   constructor(
@@ -24,13 +27,16 @@ export class CountryComponent implements OnInit {
   ngOnInit() {
     this.country = JSON.parse(localStorage.getItem('country'));
     this.flag = 'flag-icon flag-icon-' + String(this.country.CountryCode).toLowerCase();
+    this.dateUpdate = new Date(this.country.Date);
     this.getCountryAllStatus();
   }
 
   private getCountryAllStatus() {
 
     const cbOK = response => {
-      this.dataCountry = response;
+      this.dataCountry = _.get(response, 'infoCovid', []);
+      this.infoCountry = _.get(response, 'infoPais', '');
+      this.covidProvider.semana$.emit(0);
       this.cargando = false;
     };
 
@@ -39,6 +45,20 @@ export class CountryComponent implements OnInit {
     };
 
     this.covidProvider.getByCountryAllStatus(_.get(this.country, 'CountryCode')).subscribe(cbOK, cbError);
+  }
+
+  semanaAnterior() {
+    this.semana = this.semana + 7;
+    this.covidProvider.semana$.emit(this.semana);
+  }
+
+  semanaSiguiente() {
+    if (this.semana === 0) {
+      return;
+    }
+
+    this.semana = this.semana - 7;
+    this.covidProvider.semana$.emit(this.semana);
   }
 
 }

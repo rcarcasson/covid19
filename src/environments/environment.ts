@@ -2,12 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const baseUrl = 'https://api.covid19api.com/';
 export const environment = {
   production: false,
   ENDPOINTS: {
-    COUNTRY_ALL_STATUS: 'https://api.covid19api.com/country/{cod}',
-    SUMMARY: 'https://api.covid19api.com/summary',
-    COUNTRY_INFO: 'https://restcointries.eu/rest/v2/alpha/{cod}'
+    COUNTRY_ALL_STATUS: baseUrl + 'country/{cod}',
+    COUNTRY_TOTAL_STATUS: baseUrl + 'total/country/{cod}',
+    SUMMARY: baseUrl + 'summary',
+    COUNTRY_INFO: 'https://restcountries.eu/rest/v2/alpha/{cod}'
   }
 };
 

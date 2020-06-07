@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <div class="card card-info card-tabs">
+                        <div class="card-header p-0 pt-1">
+                            <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
+                                <li class="pt-2 px-3">
+                                    <h3 class="card-title"><i class="fas fa-clinic-medical"></i> Información y consejos</h3>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-que-es-tab" data-toggle="pill" href="#custom-tabs-que-es" role="tab" aria-controls="custom-tabs-que-es" aria-selected="true">¿Que es el Coronavirus?</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-consejos-tab" data-toggle="pill" href="#custom-tabs-consejos" role="tab" aria-controls="custom-tabs-consejos" aria-selected="false">Consejos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-mas-info-tab" data-toggle="pill" href="#custom-tabs-mas-info" role="tab" aria-controls="custom-tabs-mas-info" aria-selected="false">Más información</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-two-tabContent">
+                                <div class="tab-pane fade show active" id="custom-tabs-que-es" role="tabpanel" aria-labelledby="custom-tabs-que-es-tab">
+                                    <app-que-es></app-que-es>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-consejos" role="tabpanel" aria-labelledby="custom-tabs-consejos-tab">
+                                    <app-consejos></app-consejos>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-mas-info" role="tabpanel" aria-labelledby="custom-tabs-mas-info-tab">
+                                    <app-mas-info></app-mas-info>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

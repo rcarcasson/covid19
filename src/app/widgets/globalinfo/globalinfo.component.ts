@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './globalinfo.component.html',
   styleUrls: ['./globalinfo.component.css']
 })
-export class GlobalinfoComponent implements OnInit {
+export class GlobalinfoComponent implements OnInit{
   @ViewChild('paises', {static: true}) table;
 
   summary: Summary;
@@ -17,6 +17,7 @@ export class GlobalinfoComponent implements OnInit {
   error = false;
   dtOptions: any = {};
   dataTable: any;
+  updateDate: any;
 
   constructor(
     private covidProvider: CovidProvider,
@@ -25,7 +26,7 @@ export class GlobalinfoComponent implements OnInit {
 
   getCountry(info: any): void {
     localStorage.setItem('country', JSON.stringify(info));
-    this.router.navigate(['/country', String(_.get(info, 'CountryCode')).toLowerCase()]);
+    this.router.navigate(['/pais', String(_.get(info, 'CountryCode')).toLowerCase()]);
   }
 
   ngOnInit() {
@@ -39,6 +40,7 @@ export class GlobalinfoComponent implements OnInit {
       this.cargando = false;
       this.error = false;
       this.summary = response;
+      this.updateDate = new Date(this.summary.Date);
       this.dtOptions = {
         data: this.summary.Countries,
         language: {
@@ -88,6 +90,7 @@ export class GlobalinfoComponent implements OnInit {
           data: 'TotalRecovered',
           sClass: 'text-right text-success text-bold'
         }],
+        responsive: true,
         rowCallback: (row: Node, data: any[] | object, index: number) => {
           const self = this;
           $('td', row).off('click');
@@ -95,8 +98,7 @@ export class GlobalinfoComponent implements OnInit {
             self.getCountry(data);
           });
           return row;
-        },
-        responsive: true
+        }
       };
 
     };
