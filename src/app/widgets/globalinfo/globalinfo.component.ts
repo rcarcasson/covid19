@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './globalinfo.component.html',
   styleUrls: ['./globalinfo.component.css']
 })
-export class GlobalinfoComponent implements OnInit{
+export class GlobalinfoComponent implements OnInit {
   @ViewChild('paises', {static: true}) table;
 
   summary: Summary;
