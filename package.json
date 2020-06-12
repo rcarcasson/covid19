@@ -24,16 +24,19 @@
     "chart.js": "^2.9.3",
     "core-js": "^2.5.4",
     "datatables.net": "^1.10.21",
+    "datatables.net-buttons": "^1.6.2",
+    "datatables.net-buttons-dt": "^1.6.2",
     "datatables.net-dt": "^1.10.21",
     "datatables.net-responsive": "^2.2.5",
     "datatables.net-responsive-dt": "^2.2.5",
+    "firebase": ">= 5.5.7 <8",
     "flag-icon-css": "^3.4.6",
     "jquery": "^3.5.1",
+    "jszip": "^3.4.0",
     "ng2-charts": "^2.3.2",
     "rxjs": "~6.5.5",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1",
-    "firebase": ">= 5.5.7 <8"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.25",

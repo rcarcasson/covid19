@@ -43,12 +43,30 @@ export class GlobalinfoComponent implements OnInit {
       this.updateDate = new Date(this.summary.Date);
       this.dtOptions = {
         data: this.summary.Countries,
+        dom: 'Bfrtip',
+        buttons: [
+          'pdf',
+          'excel'
+        ],
         language: {
           lengthMenu: 'Mostrar _MENU_ registros por página',
           info: 'Mostrando página _PAGE_ de _PAGES_',
           infoEmpty: 'No hay registros para desplegar',
-          infoFiltered: '(filtrado desde un total de _MAX_ registros)',
+          infoFiltered: '(filtrado de un total de _MAX_ registros)',
+          zeroRecords: 'No se encontraron resultados',
+          processing: 'Procesando...',
+          emptyTable: 'Ningún dato disponible en esta tabla',
+          infoThousands: '.',
+          loadingRecords: 'Cargando...',
           search: 'Buscar: ',
+          aria: {
+            sortAscending: 'Activar para ordenar la columna de manera ascendente',
+            sortDescending: 'Activar para ordenar la columna de manera descendente'
+          },
+          buttons: {
+            copy: 'Copiar',
+            colvis: 'Visibilidad'
+          },
           paginate: {
             first: 'Inicio',
             last: 'Último',
